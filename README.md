@@ -1,8 +1,8 @@
 # linkedin-api-ts
 
-[![npm version](https://badgen.net/npm/v/linkedin-api-ts)](https://npm.im/linkedin-api-ts)
-[![npm downloads](https://badgen.net/npm/dm/linkedin-api-ts)](https://npm.im/linkedin-api-ts)
-[![license](https://badgen.net/npm/license/linkedin-api-ts)](https://github.com/andrewchmr/linkedin-api-ts/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/linkedin-api-ts.svg)](https://npm.im/linkedin-api-ts)
+[![types](https://img.shields.io/npm/types/linkedin-api-ts.svg)](https://npm.im/linkedin-api-ts)
+[![license](https://img.shields.io/npm/l/linkedin-api-ts.svg)](https://github.com/andrewchmr/linkedin-api-ts/blob/main/LICENSE)
 
 An unofficial LinkedIn API client for Node.js. Fetch profiles, experiences, education, skills, and more — using your own session cookies.
 
