@@ -1,0 +1,7 @@
+node_modules
+dist
+coverage
+.tsup
+.claude
+pnpm-lock.yaml
+*.tgz

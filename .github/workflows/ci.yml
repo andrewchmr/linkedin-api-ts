@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    if: "!contains(github.event.head_commit.message, 'skip-ci')"
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [24.x]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm i
+
+      - name: Format check
+        run: pnpm run format:check
+
+      - name: Type check
+        run: pnpm tsc --noEmit
+
+      - name: Test
+        run: pnpm test
