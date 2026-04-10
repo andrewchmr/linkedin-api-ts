@@ -4,7 +4,7 @@
 [![types](https://img.shields.io/npm/types/linkedin-api-ts.svg)](https://npm.im/linkedin-api-ts)
 [![license](https://img.shields.io/npm/l/linkedin-api-ts.svg)](https://github.com/andrewchmr/linkedin-api-ts/blob/main/LICENSE)
 
-An unofficial LinkedIn API client for Node.js. Fetch profiles, experiences, education, skills, and more — using your own session cookies.
+Node.js/TypeScript client for fetching data from LinkedIn for free.
 
 ## Install
 
@@ -14,7 +14,7 @@ npm install linkedin-api-ts
 
 ## Getting Your API Key
 
-The library authenticates using your LinkedIn session cookies, encoded as a base64 string.
+The `apiKey` is **not** an API key issued by LinkedIn — LinkedIn does not give those out. It is a base64 encoding of your own LinkedIn session cookies (`li_at` and `JSESSIONID`), which is what the library sends with every request to authenticate as you.
 
 ### Step 1: Get your cookies
 
@@ -312,6 +312,7 @@ If you find a vulnerability in how this library handles credentials or request d
 
 ## Roadmap
 
+- [ ] Browser extension ("LinkedIn Auth Helper") — one-click `apiKey` generation for non-programmers
 - [ ] CLI tool
 - [ ] Company page scraping
 - [ ] Job search
