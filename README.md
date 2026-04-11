@@ -63,6 +63,8 @@ console.log(profile.headline); // "Co-chair, Bill & Melinda Gates Foundation"
 console.log(profile.experiences); // Work history
 console.log(profile.education); // Education history
 console.log(profile.skills); // Skills with endorsement counts
+console.log(profile.projects); // Personal/professional projects
+console.log(profile.publications); // Published works
 
 // Get raw Voyager API response
 console.log(profile.raw);
@@ -156,7 +158,9 @@ linkedin.apiKey = 'NEW_BASE64_KEY';
     { "name": "Strategic Planning", "endorsementCount": 82 }
   ],
   "certifications": [],
-  "languages": [{ "name": "English", "proficiency": "Native or bilingual" }]
+  "languages": [{ "name": "English", "proficiency": "Native or bilingual" }],
+  "projects": [],
+  "publications": []
 }
 ```
 
@@ -165,7 +169,7 @@ linkedin.apiKey = 'NEW_BASE64_KEY';
 ```typescript
 const linkedin = new LinkedIn({
   apiKey: 'BASE64_ENCODED_API_KEY', // Required for authenticated access
-  proxyUrl: 'http://proxy:8080', // HTTP proxy URL
+  proxyUrl: 'http://proxy:8080', // HTTP/HTTPS/SOCKS4/SOCKS5 proxy URL
   timeout: 10000, // Request timeout in ms (default: 10000)
   delay: 200, // Delay between requests in ms (default: 200)
   maxRetries: 3, // Retry attempts on failure (default: 3)
@@ -233,6 +237,8 @@ The `profile.toJSON()` method returns an `IProfile` object:
   skills: ISkill[];
   certifications: ICertification[];
   languages: ILanguage[];
+  projects: IProject[];
+  publications: IPublication[];
 }
 ```
 
@@ -273,6 +279,22 @@ interface ICertification {
 interface ILanguage {
   name: string;
   proficiency: string | null;
+}
+
+interface IProject {
+  title: string;
+  description: string | null;
+  url: string | null;
+  startDate: string | null;
+  endDate: string | null;
+}
+
+interface IPublication {
+  name: string;
+  description: string | null;
+  url: string | null;
+  publisher: string | null;
+  publishedOn: string | null;
 }
 ```
 
