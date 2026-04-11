@@ -18,7 +18,7 @@ export class FetcherService {
 
   constructor(config: LinkedInConfig) {
     this.config = config;
-    this.impit = new Impit({ browser: 'chrome' });
+    this.impit = new Impit({ browser: 'chrome', proxyUrl: config.proxyUrl });
   }
 
   async get<T = unknown>(resource: ResourceType, params: Record<string, string> = {}): Promise<T> {
@@ -74,18 +74,26 @@ export class FetcherService {
 
       throw new Error(`LinkedIn API error: ${statusCode}`);
     } catch (err) {
-      if (
+      const terminal =
         err instanceof SessionExpiredError ||
         err instanceof RateLimitError ||
-        err instanceof ProfileNotFoundError
-      ) {
-        throw err;
-      }
-
-      if (attempt < this.config.maxRetries) {
+        err instanceof ProfileNotFoundError;
+      if (!terminal && attempt < this.config.maxRetries) {
         return this.retry<T>(url, attempt, 'Request failed');
       }
+      this.notifyErrorHandler(err);
       throw err;
+    }
+  }
+
+  private notifyErrorHandler(err: unknown): void {
+    if (!this.config.errorHandler) return;
+    const error = err instanceof Error ? err : new Error(String(err));
+    try {
+      this.config.errorHandler.handle(error);
+    } catch (handlerErr) {
+      const msg = handlerErr instanceof Error ? handlerErr.message : String(handlerErr);
+      this.log(`errorHandler threw: ${msg}`);
     }
   }
 
