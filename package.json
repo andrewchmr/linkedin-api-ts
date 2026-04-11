@@ -1,6 +1,6 @@
 {
   "name": "linkedin-api-ts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Node.js/TypeScript client for fetching data from LinkedIn for free",
   "keywords": [
     "linkedin",
